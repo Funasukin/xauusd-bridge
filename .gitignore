@@ -1,0 +1,18 @@
+# Config files with secrets
+config/mt5-xauusd.json
+
+# Runtime data
+data/
+logs/
+temp/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Virtual environments
+venv/
+.env
+*.env

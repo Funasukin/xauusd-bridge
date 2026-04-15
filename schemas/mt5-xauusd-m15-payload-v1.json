@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://livermore.local/schemas/mt5-xauusd-m15-payload-v1.json",
+  "title": "MT5 XAUUSD M15 Payload v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "broker",
+    "symbol",
+    "timeframe",
+    "generatedAt",
+    "serverTime",
+    "timezone",
+    "terminal",
+    "market",
+    "candles",
+    "meta"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "source": {
+      "type": "string",
+      "const": "mt5"
+    },
+    "broker": {
+      "type": "string",
+      "minLength": 1
+    },
+    "symbol": {
+      "type": "string",
+      "const": "XAUUSD"
+    },
+    "timeframe": {
+      "type": "string",
+      "const": "M15"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "serverTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "timezone": {
+      "type": "string",
+      "minLength": 1
+    },
+    "terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform"],
+      "properties": {
+        "platform": {
+          "type": "string",
+          "const": "MetaTrader5"
+        },
+        "accountServer": {
+          "type": ["string", "null"]
+        },
+        "build": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        }
+      }
+    },
+    "market": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["currentPrice", "sessionStats"],
+      "properties": {
+        "currentPrice": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["bid", "ask", "mid", "spread"],
+          "properties": {
+            "bid": { "type": "number", "exclusiveMinimum": 0 },
+            "ask": { "type": "number", "exclusiveMinimum": 0 },
+            "mid": { "type": "number", "exclusiveMinimum": 0 },
+            "spread": { "type": "number", "minimum": 0 }
+          }
+        },
+        "sessionStats": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dayOpen", "dayHigh", "dayLow"],
+          "properties": {
+            "dayOpen": { "type": "number", "exclusiveMinimum": 0 },
+            "dayHigh": { "type": "number", "exclusiveMinimum": 0 },
+            "dayLow": { "type": "number", "exclusiveMinimum": 0 },
+            "prevDayHigh": { "type": "number", "exclusiveMinimum": 0 },
+            "prevDayLow": { "type": "number", "exclusiveMinimum": 0 },
+            "prevDayClose": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        }
+      }
+    },
+    "candles": {
+      "type": "array",
+      "minItems": 100,
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "time",
+          "open",
+          "high",
+          "low",
+          "close",
+          "tickVolume",
+          "isClosed"
+        ],
+        "properties": {
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "open": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "high": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "low": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "close": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "tickVolume": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "spread": {
+            "type": "number",
+            "minimum": 0
+          },
+          "isClosed": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestedBars", "returnedBars", "dataStatus"],
+      "properties": {
+        "requestedBars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "returnedBars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dataStatus": {
+          "type": "string",
+          "enum": ["ok", "partial", "error"]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

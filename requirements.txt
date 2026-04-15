@@ -1,0 +1,4 @@
+MetaTrader5==5.*
+jsonschema==4.*
+tzdata
+requests

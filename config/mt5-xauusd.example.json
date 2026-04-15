@@ -1,0 +1,18 @@
+{
+  "broker": "Exness",
+  "symbol": "XAUUSD",
+  "timeframe": "M15",
+  "bars": 200,
+  "timezone": "Asia/Ho_Chi_Minh",
+  "outputPath": "data/xauusd/latest-m15.json",
+  "errorOutputPath": "data/xauusd/latest-m15.error.json",
+  "logPath": "logs/mt5-xauusd/bridge.log",
+  "schemaPath": "schemas/mt5-xauusd-m15-payload-v1.json",
+  "maxPayloadAgeSeconds": 1800,
+  "retryCount": 2,
+  "retryDelayMs": 1500,
+  "requireClosedBarsOnly": true,
+  "endpointUrl": "http://YOUR_SERVER_IP:PORT/api/market-data/xauusd-m15",
+  "bearerToken": "YOUR_BEARER_TOKEN_HERE",
+  "publishTimeoutSeconds": 15
+}
